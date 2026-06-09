@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishwaganga Engineering | Bar Bending • Shuttering • RCC Structural Works</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#1a3a5c',
+                            navyDark: '#0f2744',
+                            green: '#4a9b4f',
+                            greenLight: '#5cb85c',
+                            silver: '#9ca3af',
+                            silverLight: '#d1d5db',
+                            accent: '#2e7d8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --navy: #1a3a5c;
+            --navy-dark: #0f2744;
+            --green: #4a9b4f;
+            --green-light: #5cb85c;
+            --silver: #9ca3af;
+            --accent: #2e7d8a;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #4a9b4f 0%, #2e7d8a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(15, 39, 68, 0.97) 0%, rgba(26, 58, 92, 0.92) 50%, rgba(46, 125, 138, 0.85) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></svg>');
+            background-size: cover, 40px 40px;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(26, 58, 92, 0.3);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .safety-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .safety-item:hover .safety-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 39, 68, 0.95);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4a9b4f 0%, #2e7d8a 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 155, 79, 0.3);
+        }
+        
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .gallery-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 39, 68, 0.98);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .gallery-lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #4a9b4f 0%, #2e7d8a 100%);
+            width: 0%;
+            transition: width 1.5s ease-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .grid-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        .logo-glow {
+            filter: drop-shadow(0 0 20px rgba(74, 155, 79, 0.3));
+        }
+
+        .border-brand {
+            border-color: rgba(74, 155, 79, 0.3);
+        }
+
+        .text-brand-green {
+            color: #4a9b4f;
+        }
+
+        .text-brand-navy {
+            color: #1a3a5c;
+        }
+
+        .bg-brand-navy {
+            background-color: #1a3a5c;
+        }
+
+        .bg-brand-dark {
+            background-color: #0f2744;
+        }
+
+        .bg-brand-green {
+            background-color: #4a9b4f;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="/mnt/agents/upload/7625668E-F611-4BA7-B180-67467769E4C3.jpg" alt="Vishwaganga Logo" class="h-12 w-auto logo-glow rounded-lg">
+                    <div class="hidden sm:block">
+                        <h1 class="text-xl font-bold tracking-wider text-white">VISHWAGANGA</h1>
+                        <p class="text-xs text-brand-green tracking-widest font-semibold">ENGINEERING PVT LTD</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm hover:text-brand-green transition-colors">Home</a>
+                    <a href="#about" class="text-sm hover:text-brand-green transition-colors">About</a>
+                    <a href="#services" class="text-sm hover:text-brand-green transition-colors">Services</a>
+                    <a href="#projects" class="text-sm hover:text-brand-green transition-colors">Projects</a>
+                    <a href="#safety" class="text-sm hover:text-brand-green transition-colors">Safety</a>
+                    <a href="#contact" class="btn-primary px-6 py-2.5 rounded-full text-white font-semibold text-sm">Contact Us</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-t border-white/10">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block py-2 text-sm hover:text-brand-green">Home</a>
+                <a href="#about" class="block py-2 text-sm hover:text-brand-green">About</a>
+                <a href="#services" class="block py-2 text-sm hover:text-brand-green">Services</a>
+                <a href="#projects" class="block py-2 text-sm hover:text-brand-green">Projects</a>
+                <a href="#safety" class="block py-2 text-sm hover:text-brand-green">Safety</a>
+                <a href="#contact" class="block py-2 text-sm text-brand-green font-semibold">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen hero-bg flex items-center pt-20">
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 border border-brand-green/30">
+                        <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+                        <span class="text-sm font-medium">ROC Registered • PAN: AAKCV7081K</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                        Building India's<br>
+                        <span class="gradient-text">Infrastructure</span><br>
+                        Future
+                    </h1>
+                    
+                    <p class="text-lg text-slate-300 max-w-xl leading-relaxed">
+                        Specialized in Bar Bending, Shuttering & RCC Structural Works. 
+                        Trusted by NCC Limited, Adani Group & Suroj Buildcon for mega infrastructure projects.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="btn-primary px-8 py-4 rounded-full text-white font-bold inline-flex items-center space-x-2">
+                            <span>Get Work Order</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#projects" class="px-8 py-4 rounded-full border-2 border-white/30 hover:border-brand-green hover:text-brand-green transition-all font-semibold inline-flex items-center space-x-2">
+                            <span>View Projects</span>
+                            <i data-lucide="play" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center space-x-6 pt-4">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-xs font-bold border-2 border-brand-dark text-white">NCC</div>
+                            <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-xs font-bold border-2 border-brand-dark text-white">AD</div>
+                            <div class="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center text-xs font-bold border-2 border-brand-dark text-white">SB</div>
+                        </div>
+                        <p class="text-sm text-slate-400">Trusted by leading contractors</p>
+                    </div>
+                </div>
+                
+                <div class="relative hidden lg:block">
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-green to-brand-navy rounded-3xl blur-3xl opacity-20 floating"></div>
+                    <div class="relative glass-card rounded-3xl p-8 space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-brand-navy/50 rounded-2xl p-6 text-center border border-brand-green/20">
+                                <div class="text-4xl font-bold text-brand-green counter-value" data-target="300">0</div>
+                                <div class="text-sm text-slate-400 mt-2">Skilled Workers</div>
+                            </div>
+                            <div class="bg-brand-navy/50 rounded-2xl p-6 text-center border border-brand-green/20">
+                                <div class="text-4xl font-bold text-brand-green counter-value" data-target="4">0</div>
+                                <div class="text-sm text-slate-400 mt-2">Major Projects</div>
+                            </div>
+                            <div class="bg-brand-navy/50 rounded-2xl p-6 text-center border border-brand-green/20">
+                                <div class="text-4xl font-bold text-brand-green counter-value" data-target="5">0</div>
+                                <div class="text-sm text-slate-400 mt-2">States Covered</div>
+                            </div>
+                            <div class="bg-brand-navy/50 rounded-2xl p-6 text-center border border-brand-green/20">
+                                <div class="text-4xl font-bold text-brand-green">100%</div>
+                                <div class="text-sm text-slate-400 mt-2">Safety Compliant</div>
+                            </div>
+                        </div>
+                        <div class="bg-brand-navy/30 rounded-xl p-4 flex items-center justify-between border border-brand-green/10">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 rounded-full bg-brand-green animate-pulse"></div>
+                                <span class="text-sm font-medium">3 Ongoing Projects</span>
+                            </div>
+                            <span class="text-xs text-slate-500">Live Status</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-white/50"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-brand-navy relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6 section-reveal">
+                    <div class="inline-block px-4 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-semibold border border-brand-green/30">
+                        About Us
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold">
+                        Specialized Construction<br>
+                        <span class="text-brand-green">Excellence</span>
+                    </h2>
+                    <p class="text-slate-300 leading-relaxed text-lg">
+                        Vishwaganga Engineering Private Limited is a specialized construction firm with proven expertise in bar bending, shuttering, and RCC structural works. Incorporated on January 24, 2025, we have rapidly established ourselves as a trusted partner for India's leading contractors.
+                    </p>
+                    
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center flex-shrink-0 border border-brand-green/20">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-brand-green"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Registered Office</h4>
+                                <p class="text-slate-400">Ramayan Nagar, Barh, Patna-803213, Bihar</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy/50 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                <i data-lucide="globe" class="w-6 h-6 text-brand-green"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Pan-India Operations</h4>
+                                <p class="text-slate-400">Mumbai, Pune, Madurai, Hyderabad, Patna</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center flex-shrink-0 border border-brand-green/20">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-brand-green"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Legal Status</h4>
+                                <p class="text-slate-400">Private Limited Company (CIN: U46632BR2025PTC073288)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative section-reveal">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-brand-green to-brand-navy rounded-3xl blur-2xl opacity-20"></div>
+                    <div class="relative bg-brand-dark rounded-3xl p-8 border border-white/10">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center space-x-2">
+                            <i data-lucide="award" class="w-6 h-6 text-brand-green"></i>
+                            <span>Why Choose Us?</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-brand-navy/50 hover:bg-brand-navy transition-colors cursor-pointer group border border-white/5 hover:border-brand-green/30">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-medium">Mega Project Experience</span>
+                                </div>
+                                <span class="text-xs text-slate-500">454 MLD Malad WwTF</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-brand-navy/50 hover:bg-brand-navy transition-colors cursor-pointer group border border-white/5 hover:border-brand-green/30">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-medium">Multi-Sector Expertise</span>
+                                </div>
+                                <span class="text-xs text-slate-500">STP, Hospitals, Data Centers</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-brand-navy/50 hover:bg-brand-navy transition-colors cursor-pointer group border border-white/5 hover:border-brand-green/30">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-medium">Reputed Clients</span>
+                                </div>
+                                <span class="text-xs text-slate-500">NCC, Adani, Suroj</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-brand-navy/50 hover:bg-brand-navy transition-colors cursor-pointer group border border-white/5 hover:border-brand-green/30">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-medium">Timely Execution</span>
+                                </div>
+                                <span class="text-xs text-slate-500">Zero Delay Tolerance</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-brand-navy/50 hover:bg-brand-navy transition-colors cursor-pointer group border border-white/5 hover:border-brand-green/30">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-medium">Quality Workmanship</span>
+                                </div>
+                                <span class="text-xs text-slate-500">IS Standards Compliant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-dark relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-green/50 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 section-reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-semibold border border-brand-green/20 mb-4">
+                    Our Specialization
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Core <span class="gradient-text">Services</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Complete structural solutions from reinforcement to concrete execution, delivered with precision and safety.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Bar Bending -->
+                <div class="service-card bg-brand-navy rounded-3xl p-8 border border-white/5 relative overflow-hidden group section-reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 rounded-full blur-3xl group-hover:bg-brand-green/20 transition-all"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-green to-brand-navy flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                            <i data-lucide="grid-3x3" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Bar Bending</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">
+                            All diameter reinforcement for slabs, beams, columns, retaining walls, tank walls, and foundations. Accurate execution as per BBS.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>BBS Reading & Execution</span>
+                            </li>
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>All Diameter Bars</span>
+                            </li>
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>IS Standards Compliant</span>
+                            </li>
+                        </ul>
+                        <div class="h-1 w-full bg-brand-dark rounded-full overflow-hidden">
+                            <div class="progress-bar h-full w-0" data-width="95%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shuttering -->
+                <div class="service-card bg-brand-navy rounded-3xl p-8 border border-white/5 relative overflow-hidden group section-reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-navy/50 rounded-full blur-3xl group-hover:bg-brand-navy/30 transition-all"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-navy to-slate-600 flex items-center justify-center mb-6 shadow-lg shadow-brand-navy/30 border border-white/10">
+                            <i data-lucide="layout-template" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Shuttering / Formwork</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">
+                            Conventional timber shuttering, steel shuttering, tunnel formwork for tanks & structures. Precision alignment & leak-proof joints.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>Timber & Steel Formwork</span>
+                            </li>
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>Tunnel Formwork Systems</span>
+                            </li>
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>Precision Alignment</span>
+                            </li>
+                        </ul>
+                        <div class="h-1 w-full bg-brand-dark rounded-full overflow-hidden">
+                            <div class="progress-bar h-full w-0 bg-gradient-to-r from-brand-navy to-brand-green" data-width="90%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RCC Works -->
+                <div class="service-card bg-brand-navy rounded-3xl p-8 border border-white/5 relative overflow-hidden group section-reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 rounded-full blur-3xl group-hover:bg-brand-green/20 transition-all"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-green to-emerald-700 flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                            <i data-lucide="hard-hat" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">RCC Structural Works</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">
+                            Complete RCC execution for water tanks, buildings, basements, equipment foundations, pipe trenches, channels & galleries.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>Water Treatment Tanks</span>
+                            </li>
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>Equipment Foundations</span>
+                            </li>
+                            <li class="flex items-center space-x-2 text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-green"></i>
+                                <span>Industrial Platforms</span>
+                            </li>
+                        </ul>
+                        <div class="h-1 w-full bg-brand-dark rounded-full overflow-hidden">
+                            <div class="progress-bar h-full w-0 bg-gradient-to-r from-brand-green to-emerald-600" data-width="92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Structure Types -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 section-reveal">
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="droplets" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Water Treatment Tanks</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="building" class="w-8 h-8 text-brand-green mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Hospital Buildings</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="server" class="w-8 h-8 text-purple-400 mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Data Center Basements</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="warehouse" class="w-8 h-8 text-brand-green mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Logistics Parks</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="wall" class="w-8 h-8 text-orange-400 mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Retaining Walls</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="pipette" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Pipe Trenches</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="factory" class="w-8 h-8 text-red-400 mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Industrial Platforms</p>
+                </div>
+                <div class="bg-brand-navy/50 rounded-xl p-4 text-center border border-white/5 hover:border-brand-green/30 transition-colors">
+                    <i data-lucide="box" class="w-8 h-8 text-yellow-400 mx-auto mb-2"></i>
+                    <p class="text-sm font-medium">Manholes & Chambers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-brand-navy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 section-reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-semibold border border-brand-green/20 mb-4">
+                    Portfolio
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Major <span class="text-brand-green">Projects</span>
+                </h2>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 mt-8">
+                    <button class="filter-btn active px-6 py-2 rounded-full bg-brand-green text-white font-semibold text-sm transition-all" data-filter="all">All Projects</button>
+                    <button class="filter-btn px-6 py-2 rounded-full bg-brand-dark text-white hover:bg-brand-navy font-semibold text-sm transition-all border border-white/10" data-filter="ongoing">Ongoing</button>
+                    <button class="filter-btn px-6 py-2 rounded-full bg-brand-dark text-white hover:bg-brand-navy font-semibold text-sm transition-all border border-white/10" data-filter="completed">Completed</button>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card group relative rounded-3xl overflow-hidden bg-brand-dark border border-white/5 section-reveal" data-status="ongoing">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop" alt="Malad WwTF" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-8">
+                            <div>
+                                <p class="text-brand-green font-semibold mb-2">NCC Limited</p>
+                                <p class="text-white text-sm">Bar bending & shuttering for water treatment units, tanks & retaining walls</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">454 MLD Malad WwTF</h3>
+                            <span class="px-3 py-1 rounded-full bg-brand-green/20 text-brand-green text-xs font-semibold">Ongoing</span>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm text-slate-400">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                <span>Malad, Mumbai</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="hard-hat" class="w-4 h-4"></i>
+                                <span>WwTF Infrastructure</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card group relative rounded-3xl overflow-hidden bg-brand-dark border border-white/5 section-reveal" data-status="ongoing">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1587351021759-3e566b2af563?w=800&h=600&fit=crop" alt="Hospital Project" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-8">
+                            <div>
+                                <p class="text-brand-green font-semibold mb-2">Suroj Buildcon</p>
+                                <p class="text-white text-sm">RCC structural works, bar bending & shuttering for hospital building</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Hospital Project</h3>
+                            <span class="px-3 py-1 rounded-full bg-brand-green/20 text-brand-green text-xs font-semibold">Ongoing</span>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm text-slate-400">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                <span>Madurai, Tamil Nadu</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="heart-pulse" class="w-4 h-4"></i>
+                                <span>Healthcare</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card group relative rounded-3xl overflow-hidden bg-brand-dark border border-white/5 section-reveal" data-status="completed">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop" alt="Data Center" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-8">
+                            <div>
+                                <p class="text-brand-green font-semibold mb-2">Adani Group</p>
+                                <p class="text-white text-sm">Bar bending, shuttering & RCC for data center basement & structural frames</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Adani Connex Data Centre</h3>
+                            <span class="px-3 py-1 rounded-full bg-brand-navy/50 text-blue-400 text-xs font-semibold border border-blue-400/20">Completed</span>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm text-slate-400">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                <span>Pune</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="server" class="w-4 h-4"></i>
+                                <span>Data Center (Adani-Microsoft)</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card group relative rounded-3xl overflow-hidden bg-brand-dark border border-white/5 section-reveal" data-status="ongoing">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop" alt="Logistics Park" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-8">
+                            <div>
+                                <p class="text-brand-green font-semibold mb-2">Suroj Buildcon</p>
+                                <p class="text-white text-sm">Shuttering, bar bending & RCC for warehouse & logistics structures</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Aashirvad Logistics Park</h3>
+                            <span class="px-3 py-1 rounded-full bg-brand-green/20 text-brand-green text-xs font-semibold">Ongoing</span>
+                        </div>
+                        <div class="flex items-center space-x-4 text-sm text-slate-400">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                <span>Hyderabad, Telangana</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="truck" class="w-4 h-4"></i>
+                                <span>Logistics & Warehouse</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section id="safety" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 section-reveal">
+                <div class="inline-block px-4 py-1 rounded-full bg-red-500/10 text-red-400 text-sm font-semibold border border-red-500/20 mb-4">
+                    Safety First
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Site Safety <span class="text-red-400">Standards</span>
+                </h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Full compliance with IS norms, zero tolerance for safety violations, and comprehensive emergency preparedness at every site.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="safety-item bg-brand-navy rounded-2xl p-6 border border-white/5 hover:border-red-400/30 transition-all section-reveal">
+                    <div class="safety-icon w-14 h-14 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="shield" class="w-7 h-7 text-red-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Full PPE Compliance</h3>
+                    <p class="text-sm text-slate-400">All workers wear helmets, safety vests, safety shoes & gloves at all times.</p>
+                </div>
+                
+                <div class="safety-item bg-brand-navy rounded-2xl p-6 border border-white/5 hover:border-red-400/30 transition-all section-reveal">
+                    <div class="safety-icon w-14 h-14 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="flame" class="w-7 h-7 text-orange-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Fire Safety</h3>
+                    <p class="text-sm text-slate-400">Fire extinguishers, sand buckets & safety signage at every work zone.</p>
+                </div>
+                
+                <div class="safety-item bg-brand-navy rounded-2xl p-6 border border-white/5 hover:border-red-400/30 transition-all section-reveal">
+                    <div class="safety-icon w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="ladder" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Scaffolding Standards</h3>
+                    <p class="text-sm text-slate-400">All scaffolding erected as per IS standards with proper guardrails & toe boards.</p>
+                </div>
+                
+                <div class="safety-item bg-brand-navy rounded-2xl p-6 border border-white/5 hover:border-red-400/30 transition-all section-reveal">
+                    <div class="safety-icon w-14 h-14 rounded-xl bg-brand-green/10 flex items-center justify-center mb-4">
+                        <i data-lucide="message-square" class="w-7 h-7 text-brand-green"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Toolbox Talks</h3>
+                    <p class="text-sm text-slate-400">Daily safety briefings before work commencement at every site.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-brand-navy/50 rounded-3xl p-8 border border-white/5 section-reveal">
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-bold text-red-400 mb-2">100%</div>
+                        <p class="text-slate-400">PPE Compliance Rate</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-brand-green mb-2">Daily</div>
+                        <p class="text-slate-400">Safety Briefings</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-brand-green mb-2">Zero</div>
+                        <p class="text-slate-400">Incident Tolerance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-24 bg-brand-navy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 section-reveal">
+                <h2 class="text-4xl font-bold mb-4">Project <span class="text-brand-green">Gallery</span></h2>
+                <p class="text-slate-400">Glimpses from our construction sites across India</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop" alt="Safety Toolbox Talk" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1590644365607-1c5a8e3c0b31?w=400&h=400&fit=crop" alt="Steel Formwork" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=400&fit=crop" alt="Reinforcement Work" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=400&fit=crop" alt="Site Inspection" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400&h=400&fit=crop" alt="RCC Work" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=400&h=400&fit=crop" alt="Tank Construction" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=400&fit=crop" alt="Fire Safety" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item relative aspect-square rounded-2xl overflow-hidden cursor-pointer group section-reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=400&fit=crop" alt="Project Meeting" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="w-8 h-8 text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="gallery-lightbox" onclick="closeLightbox()">
+        <button class="absolute top-4 right-4 text-white/80 hover:text-white z-10">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Gallery Image" class="lightbox-img rounded-lg">
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-brand-dark relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark to-brand-navy/30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="section-reveal">
+                    <div class="inline-block px-4 py-1 rounded-full bg-brand-green/10 text-brand-green text-sm font-semibold border border-brand-green/20 mb-4">
+                        Contact Us
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Ready for Your<br>
+                        <span class="gradient-text">Next Project?</span>
+                    </h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        Submit your work order requirements or request a quotation. We are ready to deploy our 300+ skilled workforce to your site anywhere in India.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 p-4 rounded-xl bg-brand-navy/50 border border-white/5">
+                            <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center border border-brand-green/20">
+                                <i data-lucide="phone" class="w-6 h-6 text-brand-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-400">Phone</p>
+                                <p class="font-semibold">+91 9431016148, +91 9234066271</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 p-4 rounded-xl bg-brand-navy/50 border border-white/5">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy/50 flex items-center justify-center border border-white/10">
+                                <i data-lucide="mail" class="w-6 h-6 text-brand-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-400">Email</p>
+                                <p class="font-semibold">info@vishwaganga.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 p-4 rounded-xl bg-brand-navy/50 border border-white/5">
+                            <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center border border-brand-green/20">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-brand-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-400">Registered Office</p>
+                                <p class="font-semibold">Ramayan Nagar, Barh, Patna-803213, Bihar, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-6 rounded-2xl bg-brand-navy/30 border border-white/5">
+                        <h4 class="font-bold mb-3 flex items-center space-x-2">
+                            <i data-lucide="file-check" class="w-5 h-5 text-brand-green"></i>
+                            <span>Documents Ready for Verification</span>
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm text-slate-400">
+                            <span class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i><span>Company PAN & GST</span></span>
+                            <span class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i><span>ROC Certificate</span></span>
+                            <span class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i><span>Udyam/MSME Registration</span></span>
+                            <span class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i><span>Project Photos & Records</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-reveal">
+                    <form id="contact-form" class="bg-brand-navy rounded-3xl p-8 border border-white/10 shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Send Work Order Inquiry</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-slate-300">Company/Contractor Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-white/10 focus:border-brand-green focus:outline-none transition-colors text-white" placeholder="e.g., NCC Limited">
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2 text-slate-300">Contact Person</label>
+                                    <input type="text" required class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-white/10 focus:border-brand-green focus:outline-none transition-colors text-white" placeholder="Your Name">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2 text-slate-300">Phone Number</label>
+                                    <input type="tel" required class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-white/10 focus:border-brand-green focus:outline-none transition-colors text-white" placeholder="+91 9876543210">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-slate-300">Project Type</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-white/10 focus:border-brand-green focus:outline-none transition-colors text-white">
+                                    <option>Water Treatment Plant</option>
+                                    <option>Hospital Building</option>
+                                    <option>Data Center</option>
+                                    <option>Logistics Park/Warehouse</option>
+                                    <option>Industrial Structure</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-slate-300">Scope of Work Required</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label class="flex items-center space-x-2 p-3 rounded-lg bg-brand-dark border border-white/5 cursor-pointer hover:border-brand-green/30 transition-colors">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-white/20 text-brand-green focus:ring-brand-green bg-brand-navy">
+                                        <span class="text-sm">Bar Bending</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 rounded-lg bg-brand-dark border border-white/5 cursor-pointer hover:border-brand-green/30 transition-colors">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-white/20 text-brand-green focus:ring-brand-green bg-brand-navy">
+                                        <span class="text-sm">Shuttering</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 rounded-lg bg-brand-dark border border-white/5 cursor-pointer hover:border-brand-green/30 transition-colors">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-white/20 text-brand-green focus:ring-brand-green bg-brand-navy">
+                                        <span class="text-sm">RCC Works</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 rounded-lg bg-brand-dark border border-white/5 cursor-pointer hover:border-brand-green/30 transition-colors">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-white/20 text-brand-green focus:ring-brand-green bg-brand-navy">
+                                        <span class="text-sm">Complete Package</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-slate-300">Project Location</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-white/10 focus:border-brand-green focus:outline-none transition-colors text-white" placeholder="City, State">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-slate-300">Additional Details</label>
+                                <textarea rows="3" class="w-full px-4 py-3 rounded-xl bg-brand-dark border border-white/10 focus:border-brand-green focus:outline-none transition-colors text-white resize-none" placeholder="Project timeline, workforce requirements, etc."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full btn-primary py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center space-x-2">
+                                <span>Submit Inquiry</span>
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-navy border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="/mnt/agents/upload/7625668E-F611-4BA7-B180-67467769E4C3.jpg" alt="Vishwaganga Logo" class="h-12 w-auto rounded-lg">
+                        <div>
+                            <h1 class="text-xl font-bold tracking-wider text-white">VISHWAGANGA</h1>
+                            <p class="text-xs text-brand-green tracking-widest">ENGINEERING PVT LTD</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-md">
+                        Specialized construction firm with proven expertise in bar bending, shuttering, and RCC structural works. PAN: AAKCV7081K | CIN: U46632BR2025PTC073288
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-green">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#projects" class="hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="#safety" class="hover:text-white transition-colors">Safety</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-green">Services</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li>Bar Bending</li>
+                        <li>Shuttering / Formwork</li>
+                        <li>RCC Structural Works</li>
+                        <li>Equipment Foundations</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm"> 2025 Vishwaganga Engineering Private Limited. All rights reserved.</p>
+                <div class="flex items-center space-x-2 mt-4 md:mt-0">
+                    <span class="text-xs text-slate-500">Incorporated: 24/01/2025</span>
+                    <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                    <span class="text-xs text-slate-500">Bihar, India</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-brand-green text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center space-x-2">
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        <span>Inquiry submitted successfully!</span>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // GSAP ScrollTrigger Registration
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter-value');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            gsap.to(counter, {
+                innerHTML: target,
+                duration: 2,
+                snap: { innerHTML: 1 },
+                scrollTrigger: {
+                    trigger: counter,
+                    start: 'top 80%',
+                    once: true
+                }
+            });
+        });
+
+        // Progress Bars Animation
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            gsap.to(bar, {
+                width: width,
+                duration: 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 85%',
+                    once: true
+                }
+            });
+        });
+
+        // Section Reveal Animations
+        const revealElements = document.querySelectorAll('.section-reveal');
+        revealElements.forEach((el, index) => {
+            gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    once: true
+                }
+            });
+        });
+
+        // Project Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-brand-green', 'text-white');
+                    b.classList.add('bg-brand-dark', 'text-white');
+                });
+                btn.classList.remove('bg-brand-dark', 'text-white');
+                btn.classList.add('active', 'bg-brand-green', 'text-white');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const status = card.getAttribute('data-status');
+                    if (filter === 'all' || status === filter) {
+                        gsap.to(card, { opacity: 1, scale: 1, duration: 0.4, display: 'block' });
+                    } else {
+                        gsap.to(card, { opacity: 0, scale: 0.9, duration: 0.4, display: 'none' });
+                    }
+                });
+            });
+        });
+
+        // Lightbox Functionality
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contact-form');
+        const toast = document.getElementById('toast');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show toast
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Parallax effect for hero
+        gsap.to('.hero-bg', {
+            backgroundPosition: '50% 100%',
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#home',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+    </script>
+</body>
+</html>
